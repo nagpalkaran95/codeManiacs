@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    JustMyViews | Blogs
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for blog_entry in blog_entries %} 
+                <h3> <a href = "/blogs/{{ blog_entry.id }}/"> {{ blog_entry.title }} </a> </h3>
+                <b> Author : </b> <i> {{ blog_entry.author }} </i>
+                &emsp;
+                <b> Date : </b> {{ blog_entry.time_date }}
+                <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

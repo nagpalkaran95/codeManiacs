@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+    CodeManiacs | Profile
+{% endblock %}
+
+{% block inlineScripts %} 
+    <style>
+        .roundedCorner{
+            border-radius: 10px;
+            background-color: #000; 
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul>
+                        <li>{{ user }}</li>
+
+                        <!--{% for userData in data %}
+                            <li> {{ userData.noOfSubmissions }} </li>    
+                        {% endfor %}-->
+                    </ul>
+                </div>
+            </div>
+    </div>
+{% endblock %}

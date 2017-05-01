@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    JustMyViews | {{ blog_entry.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3> {{ blog_entry.title }}  </h3>
+        <b> Author : </b> <i> {{ blog_entry.author }} </i>
+        <br>
+        {{ blog_entry.descriptiom }}
+        <br>
+        <b> Date : </b> {{ blog_entry.time_date }}
+        <hr>
+    </div>
+{% endblock %}

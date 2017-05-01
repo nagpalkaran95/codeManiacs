@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+    CodeManiacs | Profile
+{% endblock %}
+
+{% block inlineScripts %} 
+    <style>
+        .roundedCorner{
+            border-radius: 10px;
+            background-color: #000; 
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="col-sm-12">
+                        <h2 class="page-header"> {{problem.title}} </h2>
+                        <p> {{ problem.description }} </p>
+                        <!--<button class="btn btn-primary" href="">Submit</button>-->
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-12">
+                        <div class="navbar-text">
+                            <label for="language">Language : </label>
+                            <select id="language" class="language btn btn-basic">
+                                <option>C++ 4.3.0</option>
+                                <option>Python 2.7</option>
+                                <option>Python 3.0</option>
+                            </select>
+                            <div style="text-align:center; margin-top:10px;">
+                                <label class="btn btn-primary btn-block" for="my-file-selector">
+                                    Upload file
+                                </label>
+                                <input type="file" id="my-file-selector" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">    
+                                <span class="label label-danger" id="upload-file-info"></span>
+                            </div>
+                            <hr>
+                            <div style="text-align: center;">
+                                <button class="btn btn-success" style="text-align: center;">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                        <!--<div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" data-toggle = "dropdown">
+                                C++ 4.3.2
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>Python 2.7</li>
+                            </ul>    
+                        </div>-->    
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}

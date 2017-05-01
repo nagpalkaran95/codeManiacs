@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}
+    CodeManiacs | Forums
+{% endblock %}
+
+{% block inlineScripts %} 
+    <style>
+        .roundedCorner{
+            border-radius: 10px;
+            background-color: #000; 
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                            <!--<ul class="list-unstyled list-inline">
+                                <li><h4>All Questions</h4></li>
+                                <li style="float:right">New Question</li>
+                            </ul>-->
+                        <h4>All Questions 
+                            <a href="#" data-toggle="modal" data-target="#newThread">
+                                <span style="float: right; font-size:75%;">
+                                    <span class="glyphicon glyphicon-plus"></span> 
+                                     New Thread
+                                </span>
+                             </a>
+                        </h4>
+                    </div>
+                    {% for question in questions %}
+                        <div class="panel panel-danger" style="box-shadow: 5px 5px 10px rgba(0, 0, 0, .4)">
+                            <div class="panel-heading">
+                                <strong><a href="/forums/thread/{{ question.pk }}" style="text-decoration:none; color:inherit;">{{ question.question }}</a></strong>
+                            </div>
+                            <div class="panel-body">
+                                {{ question.description }}<br>
+                                <a href="">#{{ question.tags }}</a>
+                                <br><br>
+                                <div class="pull-left">
+                                    <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span>&emsp;{{ question.upVote }}</button>
+                                    <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span>&emsp;{{ question.downVote }}</button>
+                                </div>
+                                <div class="pull-right">
+                                    <strong>
+                                        <span style="font-size:120%; color:black;">
+                                            {{ question.author }}
+                                        </span>
+                                    </strong>
+                                    <br>
+                                    <span class="text-muted">
+                                        {{ question.dateCreated }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}       
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <h4>Stats</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="newThread">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="modal-title">
+                        New Thread
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="#">
+                        {% csrf_token %}
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
+                            <input type="text" class="form-control" placeholder="Question" name="question">
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                            <input type="text" placeholder="Description (not more than 100 words)" class="form-control" name="description">
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
+                            <input type="text" class="form-control" placeholder="Tags" name="tags">
+                        </div>
+                        <input type="submit" class="btn btn-success btn-block" value="Post">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
