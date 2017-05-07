@@ -21,6 +21,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^$',forums_views.index),
-    url(r'^thread/(?P<thread_id>\d+)/$',forums_views.thread)
+    url(r'^thread/(?P<thread_id>\d+)/$',forums_views.thread),
+    url(r'^threadpost/$',forums_views.post),
     #url(r'^(?P<user_id>.+)/$',users_views.profile),
 ]

@@ -7,7 +7,11 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
-    return render(request, 'index.html')
+    auth = request.user.is_authenticated()
+    user = None
+    if auth:
+        user = User.objects.get(username = request.user.username)
+    return render(request, 'index.html', {'user': user})
 
 def logIn(request):
     if request.method == "POST":
@@ -16,7 +20,8 @@ def logIn(request):
         user = authenticate(username=handle, password=password)
         if user is not None:
             login(request,user)
-            return render(request, 'index.html',{'user' : user})
+            return HttpResponseRedirect('/')
+            #return render(request, 'index.html',{'user' : user})
         else:
             return HttpResponseRedirect('/')
     else:
@@ -32,7 +37,7 @@ def signUp(request):
             user = authenticate(username = handle, password = password)
             if user is not None:
                 login(request,user)
-                return render(request, 'index.html',{'user' : user})
+                return HttpResponseRedirect('/')
             else:
                 return HttpResponseRedirect('/')
         else:

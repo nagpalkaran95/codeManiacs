@@ -24,7 +24,19 @@
                                 <li style="float:right">New Question</li>
                             </ul>-->
                         <h4>All Questions 
-                            <a href="#" data-toggle="modal" data-target="#newThread">
+                            <!--<a href="#" data-toggle="modal" data-target="#newThread">-->
+                             <script>
+                                 function checkUserLoggedIn(){
+                                     if( {{ flag }} ){
+                                         $('#newThread').modal('show');
+                                     }
+                                     else{
+                                         alert('You need to be Logged In to post something!');
+                                     }
+                                 }
+                             </script>
+                             
+                             <a href="javascript:checkUserLoggedIn();">   
                                 <span style="float: right; font-size:75%;">
                                     <span class="glyphicon glyphicon-plus"></span> 
                                      New Thread
@@ -80,7 +92,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="#">
+                    <form method="POST" action="/forums/threadpost/" id="newThreadPost">
                         {% csrf_token %}
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
