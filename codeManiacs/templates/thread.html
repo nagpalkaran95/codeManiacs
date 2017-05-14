@@ -4,38 +4,29 @@
     CodeManiacs | Thread
 {% endblock %}
 
-{% block inlineScripts %} 
+{% block inlineScripts %}
     <style>
         .roundedCorner{
             border-radius: 10px;
-            background-color: #000; 
+            background-color: #000;
+        }
+        .light{
+            border: 1px solid grey !important;
         }
     </style>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="margin-bottom:200px;">
             <div class="row">
                 <div class="col-sm-9">
                     <div class="col-sm-12">
-                        <div class="page-header">
-                                <h3>{{ question.question }}</h3>
-                            </div>
-                        <div class="panel panel-danger" style="box-shadow: 5px 5px 10px rgba(0, 0, 0, .4)">
-                            <!--<div class="panel-heading">
-                                <strong>{{ question.question }}</strong>
-                            </div>-->
-                            <div class="panel-body">
-                                    <strong>
-                                        <span style="font-size:120%; color:black;">
-                                            {{ question.author }}
-                                        </span>
-                                    </strong>
-                                    <br>
-                                    <span class="text-muted">
-                                        {{ question.dateCreated }}
-                                    </span>
-                                    <br><br>
+                        <!-- <div class="page-header"> -->
+                                <h3>{{ question.question|capfirst }}</h3>
+                                <hr>
+                        <!-- </div> -->
+                        <div style="box-shadow: 7px 7px 30px rgba(0, 0, 0, .4); padding:0px;">
+                            <div class="panel-body" style="border:2px solid #d9534f; border-left:30px solid #d9534f;">
                                     <span style="color:black">
                                         {{ question.description }}
                                         <br>
@@ -43,48 +34,74 @@
                                     </span>
                                     <br><br>
                                     <div class="pull-left">
-                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span>&emsp;{{ answer.upVote }}</button>
-                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span>&emsp;{{ answer.downVote }}</button>
+                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span></button>
+                                        &emsp;<span style="font-size:150%">{{ question.rating }}</span>&emsp;
+                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span></button>
+                                        <!--<button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span>&emsp;{{ question.upVote }}</button>
+                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span>&emsp;{{ question.downVote }}</button>-->
                                     </div>
-                                
-                            
+                                    <div class="pull-right">
+                                        <strong>
+                                            <span style="font-size:120%; color:black;">
+                                                {{ question.author }}
+                                            </span>
+                                        </strong>
+                                        <br>
+                                        <span class="text-muted">
+                                            {{ question.dateCreated }}
+                                        </span>
+                                    </div>
+
                             </div>
                         </div>
-                        <div class="page-header">
+                        <div>
+                            <br><br>
                             {% if answers.count == 1 %}
                                 <h4>{{ answers.count }} Answer</h4>
                             {% else %}
                                 <h4>{{ answers.count }} Answers</h4>
                             {% endif %}
+                            <hr class="light">
                         </div>
                         {% for answer in answers %}
-                            <div class="panel panel-info" style="box-shadow: 5px 5px 10px rgba(0, 0, 0, .4)">
-                                <div class="panel-body">
-                                    <strong>
-                                        <span style="font-size:120%; color:black;">
-                                            {{ answer.author }}
-                                        </span>
-                                    </strong>
-                                    <br>
-                                    <span class="text-muted">
-                                        {{ answer.dateAnswered }}
-                                    </span>
-                                    <br><br>
+                            <div style="box-shadow: 7px 7px 30px rgba(0, 0, 0, .4)">
+                                <div class="panel-body" style=" border:2px solid #5bc0de; border-left:30px solid #5bc0de;">
+
+                                    <!-- <br><br> -->
                                     <span style="color:black">
                                         {{ answer.answer }}
                                     </span>
                                     <br><br>
                                     <div class="pull-left">
-                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span>&emsp;{{ answer.upVote }}</button>
-                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span>&emsp;{{ answer.downVote }}</button>
+                                        <button class="btn btn-default" onclick="return upVote();"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span></button>
+                                        &emsp;<span style="font-size:150%" id="rating">{{ answer.rating }}</span>&emsp;
+                                        <button class="btn btn-default" onclick="return downVote();"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span></button>
+                                        <!--<button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-up"></span>&emsp;{{ answer.upVote }}</button>
+                                        <button class="btn btn-default"><span style="font-size:125%" class="glyphicon glyphicon-thumbs-down"></span>&emsp;{{ answer.downVote }}</button>-->
+                                        <script>
+                                            /*function upVote(){
+                                                document.getElementById("rating").innerHTML = "";
+                                            }*/
+                                        </script>
+                                    </div>
+                                    <div class="pull-right">
+                                        <strong>
+                                            <span style="font-size:120%; color:black;">
+                                                {{ answer.author }}
+                                            </span>
+                                        </strong>
+                                        <br>
+                                        <span class="text-muted">
+                                            {{ answer.dateAnswered }}
+                                        </span>
                                     </div>
                                 </div>
                                 <!--<div class="panel-footer" style="background-color:white">
                                     answered at <span style="color:red">{{ answer.dateAnswered }}</span> by <strong>{{ answer.author }}</strong>
                                 </div>-->
                             </div>
-                        {% endfor %}   
-                        <textarea class="tinyMCE form-control" rows="10" id="html" name="html" style="margin-bottom:100px;"></textarea>                        
+                        {% endfor %}
+                        <!--<textarea class="tinyMCE form-control" rows="10" id="html" name="html" style="margin-bottom:100px;"></textarea>
                         <script src="http://cloud.tinymce.com/stable/tinymce.min.js?apiKey=p2bdssrhwh4wxzj1fpu3dq3egp7fef1881rr3uk6e0025cmp"></script>
 
 
@@ -100,7 +117,7 @@
                                     // valid_children : "+a[div], +div[*]"
                                     // extended_valid_elements : "div[*]",
                                 });
-                        </script>
+                        </script>-->
                     </div>
                 </div>
                 <div class="col-sm-3">

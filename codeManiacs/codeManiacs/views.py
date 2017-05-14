@@ -5,13 +5,15 @@ from .forms import LogIn
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from forums.models import Forum
 
 def index(request):
     auth = request.user.is_authenticated()
     user = None
     if auth:
         user = User.objects.get(username = request.user.username)
-    return render(request, 'index.html', {'user': user})
+    posts = Forum.objects.all().order_by('-dateCreated')
+    return render(request, 'index.html', {'user': user,'posts': posts})
 
 def logIn(request):
     if request.method == "POST":
@@ -26,7 +28,7 @@ def logIn(request):
             return HttpResponseRedirect('/')
     else:
         return HttpResponseRedirect('/')
-    
+
 def signUp(request):
     if request.method == "POST":
         handle = request.POST.get("handle",None)

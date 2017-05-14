@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from problems.models import ProblemSet
+import subprocess
 
 # Create your views here.
 def problemIndex(request):
@@ -22,4 +23,12 @@ def problemWithID(request,problemID):
         return render(request, 'index.html')
 
 def problemSubmit(request,problemID):
-    return render(request,'submit.html')
+    language,codeFile = None,None
+    if request.method == "POST":
+        language = request.POST.get("language",None)
+        codeFile = request.POST.get("codeFile",None)
+    if language == None or codeFile == None:
+        return render(request,'submit.html',{'problemID': problemID, 'returnStatus': 1})
+    else:
+        x = 0
+        #write code for system check

@@ -22,5 +22,5 @@ from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^$', problems_views.problemIndex),
     url(r'^(?P<problemID>\w+)/$',problems_views.problemWithID),
-    url(r'^(?P<problemID>\w+)/sub/$',problems_views.problemSubmit),
+    url(r'^(?P<problemID>\w+)/submit/$',problems_views.problemSubmit),
 ]

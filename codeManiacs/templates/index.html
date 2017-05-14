@@ -4,11 +4,11 @@
     CodeManiacs | Homepage
 {% endblock %}
 
-{% block inlineScripts %} 
+{% block inlineScripts %}
     <style>
         .rounded{
             border-radius: 10px;
-            background-color: #000; 
+            background-color: #000;
         }
     </style>
 {% endblock %}
@@ -17,32 +17,38 @@
     <!--{% if user.is_authenticated %}
         <p>Welcome {{ user }}</p>
     {% endif %}-->
-    <div class="container">
+    <div class="container" style="margin-bottom:200px">
             <div class="jumbotron">
                 <h1>A unified platform</h1>
                 <p>A place where coders meet.</p>
             </div>
             <div class="row">
                 <div class="col-sm-9">
-                    <div class="col-sm-12 rounded" style="background-color: lightcoral">
-                        <div class="page-header"><h3>Top Posts </h3></div> 
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>              
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>
-                        <p>Lets rock</p>
+                    <div class="col-sm-12 rounded" style="background-color: rgb(250, 245, 254); border: 3px solid black;">
+                        <!-- <div class="page-header"><h3>Top Posts </h3></div> -->
+                        <h2 class="text-center">Top Posts</h2>
+                        <hr>
+                        <div class="list-group">
+                            {% for post in posts %}
+                                <a href="/forums/thread/{{post.id}}/" class="list-group-item">
+                                    <span style="color:black">
+                                        <strong>{{ post.question }}</strong>
+                                    </span>
+                                    <span class="text-muted">
+                                        - {{ post.author }}
+                                    </span>
+                                    <span class="badge" style="background-color:rgb(116, 117, 251)">
+                                        {{ post.answer_set.count }} Answers
+                                    </span>
+                                </a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <div class="col-sm-12 rounded" style="background-color: lightskyblue">
-                        <div class="page-header"><h4>Upcoming Contests </h4></div>
+                    <div class="col-sm-12 rounded" style="background-color: rgb(250, 245, 254); border: 3px solid black;">
+                        <h4 class="text-center" style="padding-top:10px;">Stats</h4>
+                        <hr>
                     </div>
                 </div>
             </div>
@@ -59,14 +65,14 @@
                 i = (i+1)%3;
                 document.getElementById("demo").style.backgroundImage = "url('"+imagesrc[i]+"')";
             }
-            setInterval(function(){ 
+            setInterval(function(){
                 change()
              },3000);
         </script>
-        
+
         <br><br>
         <hr class="divider">
-        
+
         <div class="lowerHalf">
             <div class="leftHalf">
                 <div class="newest">
@@ -80,7 +86,7 @@
                             {{ entry.title }}
                             <hr>
                         {% endfor %}
-                    
+
                 </div>
             </div>
         </div>

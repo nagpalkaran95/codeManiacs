@@ -4,10 +4,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404,HttpResponseRedirect
 from django.contrib.auth.models import User
 from forums.models import Forum
+from django.core import serializers
 
 # Create your views here.
 def index(request):
-    questions = Forum.objects.all()
+    questions = Forum.objects.all().order_by('-dateCreated')
+    #json_data = serializers.serializer("json",questions)
     auth = request.user.is_authenticated()
     user = None
     flag = 0
@@ -17,7 +19,7 @@ def index(request):
         #username = request.user.username
     return render(request,'forums.html',{'questions': questions, 'flag': flag, 'user': user})
 
-    
+
 
 def thread(request, thread_id):
     try:
@@ -25,7 +27,7 @@ def thread(request, thread_id):
     except ObjectDoesNotExist:
         question = None
     if question:
-        answers = Answer.objects.filter(question__pk = thread_id)
+        answers = Answer.objects.filter(question__pk = thread_id).order_by('-dateAnswered')
         return render(request,'thread.html',{ 'question': question, 'answers': answers })
     else:
         raise Http404
