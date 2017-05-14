@@ -19,7 +19,23 @@
                 <div class="col-sm-9">
                     <div class="col-sm-12">
                         <h2 class="page-header"> {{problem.title}} </h2>
-                        <p> {{ problem.description }} </p>
+                        <p> {{ problem.description|safe }} </p>
+                        <hr>
+                        <p> {{ problem.inputDesc|safe }} </p>
+                        <hr>
+                        <p> {{ problem.outputDesc|safe }} </p>
+                        <hr>
+                        <p> {{ problem.constraints|safe }} </p>
+                        <hr>
+                        <p> {{ problem.problemSetter|safe }} </p>
+                        <hr>
+                        <p> {{ problem.problemTester|safe }} </p>
+                        <hr>
+                        <p> {{ problem.timeLimit }} </p>
+                        <hr>
+                        <p> {{ problem.publishDate }} </p>
+                        <br><br><br>
+                        
                         <!--<button class="btn btn-primary" href="">Submit</button>-->
                     </div>
                 </div>

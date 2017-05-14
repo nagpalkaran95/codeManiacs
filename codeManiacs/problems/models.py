@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+import datetime
 from django.db import models
 
 # Create your models here.
@@ -11,6 +11,14 @@ class ProblemSet(models.Model):
     submissions = models.IntegerField(default = 0)
     accuracy = models.FloatField(default = 0.0)
     tags = models.CharField(max_length = 200,default="")
-
+    description = models.CharField(max_length = 2000,default="")
+    constraints = models.CharField(max_length = 200, default="")
+    inputDesc = models.CharField(max_length = 1000,default="")
+    outputDesc = models.CharField(max_length = 1000,default="")
+    problemSetter = models.CharField(max_length = 40, default = "")
+    problemTester = models.CharField(max_length = 40, default = "")
+    publishDate = models.DateField(default = datetime.date.today)
+    timeLimit = models.FloatField(default=0.0)
+    
     def __unicode__(self):
         return self.title
