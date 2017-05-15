@@ -20,5 +20,5 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    url(r'^(?P<user_id>.+)/$',users_views.profile),
+    url(r'^(?P<user_id>[a-zA-Z0-9]+)/$',users_views.profile),
 ]

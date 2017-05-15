@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^$',forums_views.index),
     url(r'^thread/(?P<thread_id>\d+)/$',forums_views.thread),
     url(r'^threadpost/$',forums_views.post),
+    url(r'^thread/(?P<thread_id>\d+)/answer/$',forums_views.answer),
     #url(r'^(?P<user_id>.+)/$',users_views.profile),
 ]

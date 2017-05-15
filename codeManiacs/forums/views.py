@@ -40,15 +40,18 @@ def post(request):
         tags = request.POST.get("tags","")
         newQues = Forum(question = question, description = description, author = author, tags = tags)
         newQues.save()
-        '''questions = Forum.objects.all()
-        auth = request.user.is_authenticated()
-        user = None
-        flag = 0
-        if auth:
-            flag = 1
-            user = User.objects.get(username = request.user.username)
-        return render(request,'forums.html',{'questions': questions, 'flag': flag, 'user': user})
-        '''
         return HttpResponseRedirect('/forums/')
+    else:
+        raise Http404
+
+def answer(request,thread_id):
+    if request.method == "POST":
+        answer = request.POST.get("newAnswer", "")
+        author = request.user.username
+        question = Forum.objects.get(pk = thread_id)
+        ques = question.question
+        newAnswer = Answer(question = question, answer = answer, author = author)
+        newAnswer.save()
+        return HttpResponseRedirect('/forums/thread/'+str(thread_id)+'/')
     else:
         raise Http404

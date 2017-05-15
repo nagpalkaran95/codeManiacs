@@ -5,5 +5,5 @@ from users.models import UserProfile
 
 def profile(request,user_id):
     #user = User.objects.get(username = user_id)
-    user = UserProfile.objects.all()
+    user = User.objects.get(id = user_id)
     return render(request, 'profile.html', {'user' : user})

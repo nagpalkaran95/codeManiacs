@@ -78,8 +78,8 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
                     <li><a href="/problems/">Problems</a></li>
-                    <li><a href="#">Contests</a></li>
-                    <li><a href="#">Tutorials</a></li>
+                    <!-- <li><a href="#">Contests</a></li>
+                    <li><a href="#">Tutorials</a></li> -->
                     <li><a href="/forums/">Forums</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -97,7 +97,7 @@
                         </form>
                     </li>
                     {% if user.is_authenticated %}
-                        <li><a href="/profile/{{ user.username }}/"><span class="glyphicon glyphicon-user"></span> {{ user.username }}</a></li>
+                        <li><a href="/profile/{{ user.id }}/"><span class="glyphicon glyphicon-user"></span> {{ user.username }}</a></li>
                         <li><a href="/logout/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                     {% else %}
                         <li><a href="#" data-toggle="modal" data-target="#signUpPopUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
